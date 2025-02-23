@@ -22,10 +22,11 @@
         <input type="text" id="request-text" placeholder="Enter your request" required>
         <button type="submit">Submit Request</button>
     </form>
-    
+    <p id="status"></p>
+
     <script>
-        const repoOwner = "shubhanktiwari07";
-        const repoName = "shubhanktiwari07.github.io";
+        const repoOwner = "shubhanktiwari07"; // Replace with your GitHub username
+        const repoName = "shubhanktiwari07.github.io"; // Replace with your repository name
         const pdfPath = "pdf";
 
         async function fetchPDFs() {
@@ -48,31 +49,24 @@
                 }
             });
         }
- fetchPDFs();
-       <h2>Request a PDF</h2>
-<form id="request-form">
-    <input type="text" id="request-text" placeholder="Enter your request" required>
-    <button type="submit">Submit Request</button>
-</form>
-<p id="status"></p>
 
-<script>
-    const sheetUrl = "https://script.google.com/macros/s/AKfycbzMUs8ERzVDyWuLJzzH8H1RjEyFxH-iBLy87IXQzVNauQl1ZtQhibTUSyo9OWOEoe_R5A/exec"; // Replace with your Apps Script URL
+        document.getElementById("request-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const requestText = document.getElementById("request-text").value;
+            const sheetUrl = "https://script.google.com/macros/s/AKfycbzMUs8ERzVDyWuLJzzH8H1RjEyFxH-iBLy87IXQzVNauQl1ZtQhibTUSyo9OWOEoe_R5A/exec";
 
-    document.getElementById("request-form").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        const requestText = document.getElementById("request-text").value;
-        const response = await fetch(sheetUrl, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ request: requestText })
+            const response = await fetch(sheetUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ request: requestText })
+            });
+
+            document.getElementById("status").innerText = "Request submitted successfully!";
+            document.getElementById("request-text").value = "";
         });
 
-        document.getElementById("status").innerText = "Request submitted!";
-        document.getElementById("request-text").value = "";
-    });
-</script>
+        fetchPDFs();
     </script>
 </body>
 </html>
