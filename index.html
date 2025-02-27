@@ -3,70 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Library</title>
+    <title>Till Death</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        #pdf-list { list-style: none; padding: 0; }
-        li { margin: 10px 0; }
-        a { text-decoration: none; color: blue; }
-        form { margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <h1>PDF Library</h1>
-    <p>Download PDFs from the list below:</p>
-    <ul id="pdf-list"></ul>
-
-    <h2>Request a PDF</h2>
-    <form id="request-form">
-        <input type="text" id="request-text" placeholder="Enter your request" required>
-        <button type="submit">Submit Request</button>
-    </form>
-    <p id="status"></p>
-
-    <script>
-        const repoOwner = "shubhanktiwari07"; // Replace with your GitHub username
-        const repoName = "shubhanktiwari07.github.io"; // Replace with your repository name
-        const pdfPath = "pdf";
-
-        async function fetchPDFs() {
-            const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pdfPath}`;
-            const response = await fetch(url);
-            const files = await response.json();
-
-            const list = document.getElementById("pdf-list");
-            list.innerHTML = "";
-
-            files.forEach(file => {
-                if (file.name.endsWith(".pdf")) {
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-                    a.href = file.download_url;
-                    a.textContent = file.name;
-                    a.target = "_blank";
-                    li.appendChild(a);
-                    list.appendChild(li);
-                }
-            });
+        /* Romantic background with gradient */
+        body {
+            background: linear-gradient(to bottom, #FFD1DC, #FFB6C1); /* Soft pink gradient */
+            color: #333;
+            font-family: 'Dancing Script', cursive; /* Romantic font */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-size: cover;
+            animation: fadeIn 2s ease-out;
+            position: relative;
+            overflow: hidden; /* Ensures nothing goes outside the body */
         }
 
-        document.getElementById("request-form").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const requestText = document.getElementById("request-text").value;
-            const sheetUrl = "https://script.google.com/macros/s/AKfycbzMUs8ERzVDyWuLJzzH8H1RjEyFxH-iBLy87IXQzVNauQl1ZtQhibTUSyo9OWOEoe_R5A/exec";
+        /* Background Name - "Arshita" */
+        .background-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15em; /* Large text size */
+            color: rgba(255, 255, 255, 0.1); /* Light fade effect */
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            white-space: nowrap;
+            z-index: -2; /* Ensures it stays behind all content */
+            opacity: 0.2;
+            letter-spacing: 10px;
+            font-weight: bold;
+            transform: translate(-50%, -50%) rotate(-15deg); /* Slight tilt for effect */
+        }
 
-            const response = await fetch(sheetUrl, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ request: requestText })
-            });
+        /* Romantic heading */
+        h1 {
+            font-size: 4.5em;
+            color: #D32F2F; /* Warm romantic red */
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite; /* Gentle pulsing effect */
+        }
 
-            document.getElementById("status").innerText = "Request submitted successfully!";
-            document.getElementById("request-text").value = "";
-        });
+        /* Timer with heart icon background */
+        .timer {
+            font-size: 4em; /* Larger clock size */
+            color: #FF6F61; /* Light red color */
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
 
-        fetchPDFs();
+        /* Months Passed section */
+        .months-passed {
+            font-size: 2.5em;
+            color: #444;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        /* Romantic message or quote */
+        .romantic-message {
+            font-size: 1.8em;
+            color: #D32F2F;
+            font-family: 'Great Vibes', cursive;
+            margin-top: 30px;
+            font-weight: lighter;
+            animation: fadeIn 3s ease-out;
+        }
+
+        /* Watermark style */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6em;
+            color: rgba(255, 255, 255, 0.1); /* Light fade effect */
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            white-space: nowrap;
+            z-index: -1; /* Ensure it stays behind all content */
+            opacity: 0.1;
+            letter-spacing: 4px;
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Till Death</h1>
+    <div class="timer" id="timer"></div>
+    <div class="months-passed" id="monthsPassed"></div>
+    <div class="romantic-message">"Every second spent with you is a moment of eternity."</div>
+
+    <!-- Background Name "Arshita" -->
+    <div class="background-name">Arshita</div>
+
+    <!-- Watermark Layer -->
+    <div class="watermark">Arshita</div>
+
+    <script>
+        // Set the start date to October 14, 2024
+        const startDate = new Date("October 14, 2024 00:00:00").getTime();
+
+        // Function to update the timer
+        function updateTimer() {
+            const now = new Date().getTime();
+            const elapsedTime = now - startDate;
+
+            // Time calculations for days, hours, minutes, and seconds
+            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+            // Display the result in the timer div
+            document.getElementById("timer").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+            // Calculate months passed
+            const months = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 30)); // Approximate months
+            document.getElementById("monthsPassed").innerHTML = months + " Months Passed";
+        }
+
+        // Update the timer every second
+        setInterval(updateTimer, 1000);
     </script>
 </body>
 </html>
